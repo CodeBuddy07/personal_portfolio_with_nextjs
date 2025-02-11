@@ -14,9 +14,8 @@ export const TopBar = async () => {
   const session = await getServerSession(authOptions);
 
   return (
-    <header className="flex justify-between items-center dark:bg-gray-900 bg-gray-300 dark:text-white text-black p-4 shadow-md">
+    <header className="flex justify-between items-center dark:bg-gray-900 bg-gray-200 dark:text-white text-black p-4 ">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-bold">Welcome Back</h1>
         <Link href="/">
           <Button variant="outline" className="dark:text-white text-black border-white">
             &larr; Go Home

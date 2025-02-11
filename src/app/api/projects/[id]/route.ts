@@ -26,7 +26,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   }
 }
 
-export async function GET({ params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request,{ params }: { params: Promise<{ id: string }> }) {
     try {
       await dbConnect();
 

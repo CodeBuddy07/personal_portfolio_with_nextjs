@@ -11,19 +11,12 @@ const MotionButton = dynamic(() => import("framer-motion").then(mod => mod.motio
 
 const ContactForm = () => {
     const { status } = useSession(); 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [statusMessage, setStatusMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -58,31 +51,28 @@ const ContactForm = () => {
             setLoading(false);
         }
     };
+
     return (
         <MotionDiv
-            className="w-full max-w-2xl bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl p-8 text-white border border-white/20"
+            className="w-full max-w-2xl bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-8 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700"
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             transition={{ duration: 0.8 }} 
         >
             <h2 className="text-4xl font-bold text-center mb-6">📬 Contact Us</h2>
-            <p className="text-center text-lg text-white/80 mb-8">
+            <p className="text-center text-lg text-gray-700 dark:text-gray-300 mb-8">
                 We&apos;d love to hear from you! Fill out the form below, and we&apos;ll get back to you soon.
             </p>
 
             <MotionForm
-
                 onSubmit={handleSubmit}
                 className="space-y-6"
                 initial={{ opacity: 0 }} 
                 animate={{ opacity: 1 }} 
                 transition={{ duration: 1 }} 
             >
-                <MotionDiv
-                    initial={{ y: 30, opacity: 0 }} 
-                    animate={{ y: 0, opacity: 1 }} 
-                    transition={{ duration: 0.6 }}
-                >
+                {/* Name Field */}
+                <MotionDiv initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
                     <label htmlFor="name" className="block text-lg font-medium">
                         Your Name
                     </label>
@@ -93,17 +83,13 @@ const ContactForm = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-white/50"
+                        className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-gray-500 dark:placeholder-gray-400"
                         required
-                        aria-label="Your Name"
                     />
                 </MotionDiv>
 
-                <MotionDiv
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
+                {/* Email Field */}
+                <MotionDiv initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
                     <label htmlFor="email" className="block text-lg font-medium">
                         Your Email
                     </label>
@@ -114,17 +100,13 @@ const ContactForm = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-white/50"
+                        className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-gray-500 dark:placeholder-gray-400"
                         required
-                        aria-label="Your Email"
                     />
                 </MotionDiv>
 
-                <MotionDiv
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                >
+                {/* Message Field */}
+                <MotionDiv initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}>
                     <label htmlFor="message" className="block text-lg font-medium">
                         Your Message
                     </label>
@@ -134,12 +116,12 @@ const ContactForm = () => {
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Write your message here..."
-                        className="w-full p-3 h-32 rounded-lg bg-white/20 border border-white/30 text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-white/50 resize-none"
+                        className="w-full p-3 h-32 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 outline-none placeholder-gray-500 dark:placeholder-gray-400 resize-none"
                         required
-                        aria-label="Your Message"
                     />
                 </MotionDiv>
 
+                {/* Submit Button */}
                 <MotionButton
                     type="submit"
                     className="w-full py-3 bg-blue-500 hover:bg-blue-600 transition-all duration-200 text-white text-lg font-semibold rounded-lg shadow-lg"
@@ -151,10 +133,11 @@ const ContactForm = () => {
                 </MotionButton>
             </MotionForm>
 
+            {/* Status Message */}
             {statusMessage && (
                 <MotionP
                     role="alert"
-                    className={`mt-6 text-center text-lg font-medium p-3 rounded-lg ${statusMessage.includes("✅") ? "bg-green-500/20" : "bg-red-500/20"}`}
+                    className={`mt-6 text-center text-lg font-medium p-3 rounded-lg ${statusMessage.includes("✅") ? "bg-green-500/20 text-green-700 dark:text-green-400" : "bg-red-500/20 text-red-700 dark:text-red-400"}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6 }}
@@ -163,8 +146,6 @@ const ContactForm = () => {
                 </MotionP>
             )}
         </MotionDiv>
-
-
     );
 };
 
