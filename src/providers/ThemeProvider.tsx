@@ -15,7 +15,7 @@ export function ThemeProvider({
     }, []);
 
     if (!isMounted) {
-        return null; // Prevents mismatches during hydration
+        return null;
     }
     return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

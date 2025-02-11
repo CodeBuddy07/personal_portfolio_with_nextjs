@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-export default function HeroBanner() {
+export  const HeroBanner = () =>{
+
     return (
         <section className="relative w-full py-20 bg-gradient-to-r  overflow-hidden">
 
@@ -31,7 +32,7 @@ export default function HeroBanner() {
                         Hello!
                     </span>
                     <h1 className="text-4xl font-extrabold md:text-6xl leading-[1.2] text-foreground mt-2">
-                        I&apos;m <span className="text-primary">Ruhul Amin</span>
+                        I&apos;m <span className="text-primary"> Mang Coda Ruhul Amin</span>
                     </h1>
                     <p className="text-muted-foreground mt-4 md:text-lg text-base md:max-w-3xl p-5 md:p-0">
                         A passionate Web Developer dedicated to crafting modern, scalable, and high-performance applications.

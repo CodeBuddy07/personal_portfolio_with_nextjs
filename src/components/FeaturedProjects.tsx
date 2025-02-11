@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 const FeaturedProjects = () => {
   const projects = [
@@ -25,8 +27,8 @@ const FeaturedProjects = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-100 dark:bg-gray-900">
-      <div className="container mx-auto text-center">
+    <section className="py-20  bg-gray-100 dark:bg-background">
+      <div className="container max-w-7xl mx-auto text-center">
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-8">Featured Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
@@ -43,15 +45,15 @@ const FeaturedProjects = () => {
                   className="rounded-t-lg"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{project.title}</h3>
+              <div className="p-6 text-left">
+                <h3 className="text-xl  font-semibold text-gray-900 dark:text-white mb-3">{project.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
-                <a
-                  href={project.link}
-                  className="text-blue-600 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300 transition duration-300"
-                >
-                  View Project
-                </a>
+ 
+                <Link href={project.link}>
+                  <Button>
+                    View Project
+                  </Button>
+                </Link>
               </div>
             </Card>
           ))}
