@@ -5,11 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function AddProjectPage() {
-  const router = useRouter();
+
   const [project, setProject] = useState({
     title: "",
     shortDescription: "",
@@ -36,6 +35,7 @@ export default function AddProjectPage() {
 
     const data = await res.json();
     setLoading(false);
+    console.log(res);
 
     if (res.ok) {
       toast.success("Project added successfully!");
@@ -48,7 +48,7 @@ export default function AddProjectPage() {
         repoLink: "",
         image: "",
       });
-      router.refresh();
+      (e.target as HTMLFormElement).reset();
     } else {
       toast.error(data.error || "Failed to add project.");
     }

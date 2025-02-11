@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     });
 
     await newProject.save();
-    return NextResponse.json({ message: "Project added successfully" }, { status: 201 });
+    return NextResponse.json({ message: "Project added successfully", ok:true }, { status: 201 });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ error: "Failed to add project" }, { status: 500 });

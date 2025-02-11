@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import LogoutButton from "./LogoutButton";
 import { ModeToggle } from "../shared/ModeToggler";
-import { Button } from "@/components/ui/button"; // ShadCN Button
+import { Button } from "@/components/ui/button"; 
 
 
 
@@ -19,7 +19,7 @@ export const TopBar = async () => {
         <h1 className="text-xl font-bold">Welcome Back</h1>
         <Link href="/">
           <Button variant="outline" className="dark:text-white text-black border-white">
-            Go Home
+            &larr; Go Home
           </Button>
         </Link>
       </div>
