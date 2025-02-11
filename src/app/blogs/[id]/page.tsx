@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "@/components/shared/Navbar";
@@ -24,6 +24,10 @@ export default function BlogDetailPage() {
 
   if (!blog) {
     return <BlogSkeleton/>;
+  }
+
+  if(!blog.title){
+    return notFound();
   }
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,9 @@ const ProjectDetail = () => {
     const [projects, setProjects] = useState<any>({});
 
     const getProjects = async () => {
-        const res = await fetch(`/api/projects?id=${id}`);
+        const res = await fetch(`/api/projects/${id}`);
         const data = await res.json();
-        console.log(data.projects[0]);
-        setProjects(data.projects[0]);
+        setProjects(data.projects);
     }
 
     useEffect(() => {
@@ -30,14 +29,7 @@ const ProjectDetail = () => {
 
 
     if (!projects) {
-        return (
-            <div className="text-center py-20">
-                <h2 className="text-3xl font-bold">Project Not Found</h2>
-                <Link href="/projects">
-                    <Button variant="outline" className="mt-4">Back to Projects</Button>
-                </Link>
-            </div>
-        );
+        return notFound()
     }
 
     return (

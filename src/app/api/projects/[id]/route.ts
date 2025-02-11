@@ -31,7 +31,7 @@ export async function GET(req: Request,{ params }: { params: Promise<{ id: strin
       await dbConnect();
 
       const { id } = await params;
-
+        
   
       if (!id) {
         return NextResponse.json({ error: "Project ID is required" }, { status: 400 });

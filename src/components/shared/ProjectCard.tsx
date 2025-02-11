@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 interface Props {
     project: {
-        id: string;
+        _id: string;
         title: string;
         image: string;
     };
@@ -21,7 +21,7 @@ const ProjectCard = ({ project }: Props) => (
 
         <Image src={project.image} alt={project.title} className="rounded-md w-full " layout="responsive" width={700} height={475} />
         <h3 className="text-lg font-bold mt-2">{project.title}</h3>
-        <Link href={`/projects/${project.id}`} >
+        <Link href={`/projects/${project._id}`} >
             <Button className="!mt-5">
                 View Project
             </Button>

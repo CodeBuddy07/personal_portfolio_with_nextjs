@@ -8,20 +8,35 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import { Skeleton } from "@/components/shared/Skeleton";
+import { toast } from "sonner";
 
 export default function BlogPage() {
     const [blogs, setBlogs] = useState<any>([]);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         async function fetchBlogs() {
-            const res = await fetch("/api/add-blogs");
-            const data = await res.json();
-            console.log(data);
-            setBlogs(data);
+            try {
+                setLoading(true);
+                const res = await fetch("/api/add-blogs");
+                const data = await res.json();
+                console.log(data);
+                setBlogs(data);
+            } catch (error) {
+                console.log(error);
+                toast("Something went wrong.")
+            }finally{
+                setLoading(false);
+            }
         }
         fetchBlogs();
     }, []);
+
+    if (loading) {
+        return <Skeleton />
+    }
 
     return (
         <>
