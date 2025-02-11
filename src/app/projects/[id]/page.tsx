@@ -48,7 +48,7 @@ const ProjectDetail = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="max-w-4xl mx-auto py-12 px-6"
+                className="max-w-4xl mx-auto py-12 px-6 min-h-screen"
             >
                 <Link href="/projects">
                     <Button variant="outline" className="mb-4">⬅ Back to Projects</Button>

@@ -48,7 +48,7 @@ export  const HeroBanner = () =>{
                                 View My Work
                             </Button>
                         </Link>
-                        <a href="/resume.pdf" download>
+                        <a href="https://docs.google.com/document/d/1HNn6EsjwJ9kXSgB8iMhfaqcZCl_4LB9BKt8KY7L5zB4/export?format=pdf" download>
                             <Button variant="outline" size="sm" className="px-6  py-3 text-lg rounded-lg border-2 shadow-md">
                                 Download Resume
                             </Button>

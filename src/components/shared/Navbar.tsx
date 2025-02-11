@@ -35,6 +35,12 @@ export default function Navbar() {
             Blogs
           </Link>
           <Link
+            href="/projects"
+            className={pathName === "/projects" ? "text-blue-500 transition" : "text-muted-foreground hover:text-blue-500 transition"}
+          >
+            Projects
+          </Link>
+          <Link
             href="/contact"
             className={pathName === "/contact" ? "text-blue-500 transition" : "text-muted-foreground hover:text-blue-500 transition"}
           >
@@ -67,6 +73,9 @@ export default function Navbar() {
           </Link>
           <Link href="/blogs" className="block text-muted-foreground hover:text-primary transition">
             Blogs
+          </Link>
+          <Link href="/projects" className="block text-muted-foreground hover:text-primary transition">
+            Projects
           </Link>
           <Link href="/contact" className="block text-muted-foreground hover:text-primary transition">
             Contact
