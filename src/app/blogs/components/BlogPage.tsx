@@ -33,7 +33,7 @@ const BlogPageContent = () => {
     }, []);
 
     if (loading) {
-        return <Skeleton />
+        return <Skeleton className="h-64 w-full rounded-md" />
     }
 
     return (
