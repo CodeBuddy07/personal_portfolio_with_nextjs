@@ -8,15 +8,6 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 
-// interface Project {
-//     id: string;
-//     title: string;
-//     description: string;
-//     image: string;
-//     github: string;
-//     live: string;
-//     technologies: string[];
-// }
 
 
 
@@ -34,7 +25,7 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         getProjects();
-    }, []);
+    },[]);
 
 
 

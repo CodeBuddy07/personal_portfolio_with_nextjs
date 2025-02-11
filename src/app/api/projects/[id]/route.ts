@@ -29,6 +29,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 export async function GET({ params }: { params: Promise<{ id: string }> }) {
     try {
       await dbConnect();
+
       const { id } = await params;
 
   
@@ -40,5 +41,28 @@ export async function GET({ params }: { params: Promise<{ id: string }> }) {
     } catch (error) {
       console.log(error);
       return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
+    }
+  }
+
+
+  export async function POST(req: Request) {
+    try {
+      await dbConnect();
+     
+      const { id } = await req.json();
+  
+      if (!id) {
+        return NextResponse.json({ error: "Project ID is required" }, { status: 400 });
+      }
+  
+      const deletedProject = await Projects.findByIdAndDelete(id);
+
+      if (!deletedProject) {
+        return NextResponse.json({ error: "Project not found" }, { status: 404 });
+      }
+      return NextResponse.json({ message: "Project deleted successfully" }, { status: 200 });
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
     }
   }

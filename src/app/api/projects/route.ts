@@ -41,16 +41,4 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
-  try {
-    await dbConnect();
-    const { id } = await req.json();
-    if (!id) return NextResponse.json({ error: "Project ID is required" }, { status: 400 });
 
-    await Projects.findByIdAndDelete(id);
-    return NextResponse.json({ message: "Project deleted successfully" }, { status: 200 });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
-  }
-}

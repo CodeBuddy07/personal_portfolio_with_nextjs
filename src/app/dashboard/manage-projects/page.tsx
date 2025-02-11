@@ -14,20 +14,23 @@ export default function ManageProjectsPage() {
   const [projects, setProjects] = useState<any[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false); 
+  const [isHydrated, setIsHydrated] = useState(false);
 
 
   useEffect(() => {
     setIsHydrated(true);
   }, []);
 
+  async function fetchProjects() {
+    const res = await fetch("/api/projects");
+    const data = await res.json();
+    setProjects(data.projects);
+  }
+
   useEffect(() => {
-    async function fetchProjects() {
-      const res = await fetch("/api/projects");
-      const data = await res.json();
-      setProjects(data.projects);
-    }
+
     if (isHydrated) fetchProjects();
   }, [isHydrated]);
 
@@ -64,6 +67,38 @@ export default function ManageProjectsPage() {
     setSelectedProject({ ...selectedProject, [e.target.name]: e.target.value });
   }
 
+  const handleDelete = async (id:string) => {
+    setDeleting(true);
+    try {
+      const response = await fetch(`/api/projects/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id, 
+        }),
+      });
+      
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Project deleted successfully!");
+        router.refresh();
+        setSelectedProject(null);
+        fetchProjects();
+      } else {
+        toast.error(data.error || "Failed to delete the project.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred while deleting the project.");
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -98,7 +133,7 @@ export default function ManageProjectsPage() {
                 <Input name="shortDescription" placeholder="Short Description" value={selectedProject.shortDescription} onChange={handleChange} required />
               </div>
 
-              <Textarea name="description" placeholder="Project Description" value={selectedProject.description} onChange={handleChange} required />
+              <Textarea name="description" rows={13} placeholder="Project Description" value={selectedProject.description} onChange={handleChange} required />
               <Input name="technologies" placeholder="Technologies (comma-separated)" value={selectedProject.technologies} onChange={handleChange} required />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -108,11 +143,18 @@ export default function ManageProjectsPage() {
 
               <Input name="image" placeholder="Image URL" value={selectedProject.image} onChange={handleChange} required />
 
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button type="submit" className="w-full text-lg py-3" disabled={loading}>
-                  {loading ? "Updating..." : "Update Project"}
+              <div className="flex justify-center items-center gap-5 w-full">
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button type="submit" className="w-full text-lg py-3" disabled={loading}>
+                    {loading ? "Updating..." : "Update Project"}
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button onClick={()=>handleDelete(selectedProject._id)}  className="w-full text-lg py-3 !bg-red-500 !text-white" disabled={deleting}>
+                  {deleting ? "Deleting..." : "Delete Project"}
                 </Button>
               </motion.div>
+              </div>
             </form>
           )}
         </>
